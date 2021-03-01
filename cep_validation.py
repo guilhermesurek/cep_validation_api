@@ -19,6 +19,8 @@ class CEP():
         # Save input
         self.cep = cep
         self.data_local = data_local
+        # Initialize error
+        self.error = None
         # Load databases
         self._load_databases()
         # Preprocess CEP data
@@ -58,7 +60,7 @@ class CEP():
             # Remove spaces
             self.cep = self.cep.replace(' ', '')
             # Check if it is 8 lenght numeric
-            if len(self.cep) == 8 and self.cep.isnumeric():
+            if len(self.cep) <= 8 and len(self.cep) >= 5 and self.cep.isnumeric():
                 # Valid
                 # Get the 5 first numbers. I.e. from '81070100' get '81070'
                 self.cep_root5 = self.cep[:5]
@@ -66,9 +68,13 @@ class CEP():
                 # Invalid
                 # Set cep_root5 to None
                 self.cep_root5 = None
+                # Set error message
+                self.error = {"error": {"message": "CEP data has less than 5 digits, more than 8 digits or is not numeric.", "exception": ""}}
         else:
             # cep is None
             self.cep_root5 = None
+            # Set error message
+            self.error = {"error": {"message": "Data in 'cep' key is empty.", "exception": ""}}
 
     def _validate(self):
         '''
@@ -91,6 +97,9 @@ class CEP():
         '''
             Function to generate the output.
         '''
-        output = {'cep_validation': self.valid,
-                  'cep_data': self.cep_root5}
+        if self.error:
+            output = self.error
+        else:
+            output = {'cep_validation': self.valid,
+                    'cep_data': self.cep_root5}
         return output
