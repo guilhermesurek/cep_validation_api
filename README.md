@@ -5,6 +5,7 @@ The validation uses only the first 5 digits of the cep data.
 
 ## File Structure
 
+```
 ├──files (csv files for local running)
    ├──CEPs.csv (csv file containing all first 5 digits CEPs)
 ├──tests (test package to test all the features)
@@ -16,3 +17,4 @@ The validation uses only the first 5 digits of the cep data.
 ├──requirements.txt (All requirements needed to run application on production, not included testing/debuging libraries)
 ├──testing_notebook.ipynb (Notebook to fast testing/validating)
 └──wsgi.py ()
+```
