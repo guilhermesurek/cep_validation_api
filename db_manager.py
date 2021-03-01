@@ -8,9 +8,9 @@ def get_conection():
 
     creds = dict(
         driver='{ODBC Driver 17 for SQL Server}',
-        server='srvvotorantimcrm.database.windows.net',
-        port='1433',
-        database='dbcrm',
+        server='server',
+        port='port',
+        database='db',
         user='user',
         passwd='pass',
         encrypt='yes',
